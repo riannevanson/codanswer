@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const BaseEntity_1 = require("typeorm/repository/BaseEntity");
 const class_validator_1 = require("class-validator");
+const entity_1 = require("../answers/entity");
 let Question = class Question extends BaseEntity_1.BaseEntity {
 };
 __decorate([
@@ -38,6 +39,10 @@ __decorate([
     typeorm_1.Column("text", { nullable: false }),
     __metadata("design:type", String)
 ], Question.prototype, "userName", void 0);
+__decorate([
+    typeorm_1.OneToMany(_ => entity_1.default, answer => answer.question),
+    __metadata("design:type", Array)
+], Question.prototype, "answers", void 0);
 Question = __decorate([
     typeorm_1.Entity()
 ], Question);

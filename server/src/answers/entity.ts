@@ -1,10 +1,11 @@
 // src/answers/entity.ts
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { BaseEntity } from "typeorm/repository/BaseEntity";
 import { IsString } from "class-validator";
+import Question from "../questions/entity";
 
 @Entity()
-export default class Answers extends BaseEntity {
+export default class Answer extends BaseEntity {
   @PrimaryGeneratedColumn() id?: number;
 
   @IsString()
@@ -18,4 +19,7 @@ export default class Answers extends BaseEntity {
   @IsString()
   @Column("text", { nullable: false })
   userName: string;
+
+  @ManyToOne(_ => Question, question => question.answers)
+  question: Question;
 }

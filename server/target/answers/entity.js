@@ -12,29 +12,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const BaseEntity_1 = require("typeorm/repository/BaseEntity");
 const class_validator_1 = require("class-validator");
-let Answers = class Answers extends BaseEntity_1.BaseEntity {
+const entity_1 = require("../questions/entity");
+let Answer = class Answer extends BaseEntity_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Answers.prototype, "id", void 0);
+], Answer.prototype, "id", void 0);
 __decorate([
     class_validator_1.IsString(),
     typeorm_1.Column("text", { nullable: false }),
     __metadata("design:type", String)
-], Answers.prototype, "answer", void 0);
+], Answer.prototype, "answer", void 0);
 __decorate([
     class_validator_1.IsString(),
     typeorm_1.Column("text", { nullable: false }),
     __metadata("design:type", String)
-], Answers.prototype, "vote", void 0);
+], Answer.prototype, "vote", void 0);
 __decorate([
     class_validator_1.IsString(),
     typeorm_1.Column("text", { nullable: false }),
     __metadata("design:type", String)
-], Answers.prototype, "userName", void 0);
-Answers = __decorate([
+], Answer.prototype, "userName", void 0);
+__decorate([
+    typeorm_1.ManyToOne(_ => entity_1.default, question => question.answers),
+    __metadata("design:type", entity_1.default)
+], Answer.prototype, "question", void 0);
+Answer = __decorate([
     typeorm_1.Entity()
-], Answers);
-exports.default = Answers;
+], Answer);
+exports.default = Answer;
 //# sourceMappingURL=entity.js.map
